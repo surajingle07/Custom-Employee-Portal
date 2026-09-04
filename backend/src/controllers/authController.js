@@ -13,10 +13,11 @@ const fallbackUsers = [
 ];
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const email = req.body && req.body.email ? String(req.body.email).trim() : '';
+  const password = req.body && req.body.password ? String(req.body.password) : '';
 
   if (!email || !password) {
-    return res.status(400).json({ success: false, message: 'Please provide email and password' });
+    return res.status(400).json({ success: false, message: 'Please provide valid email and password' });
   }
 
   try {

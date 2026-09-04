@@ -18,15 +18,19 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const cleanEmail = email.trim();
+    if (!cleanEmail || !password) return;
     setSubmitting(true);
-    await login(email, password);
+    await login(cleanEmail, password);
     setSubmitting(false);
   };
 
-  const handleQuickLogin = (acc) => {
+  const handleQuickLogin = async (acc) => {
     setEmail(acc.email);
     setPassword(acc.pass);
-    login(acc.email, acc.pass);
+    setSubmitting(true);
+    await login(acc.email, acc.pass);
+    setSubmitting(false);
   };
 
   return (
