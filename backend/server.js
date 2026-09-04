@@ -18,6 +18,14 @@ app.use('/api/admin', require('./src/routes/roleRoutes'));
 app.use('/api/admin/audit-logs', require('./src/routes/auditRoutes'));
 app.use('/api/zoho', require('./src/routes/zohoRoutes'));
 
+app.get(['/', '/api'], (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Custom Employee Portal API Engine is running',
+    health: '/api/health'
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'OK',
